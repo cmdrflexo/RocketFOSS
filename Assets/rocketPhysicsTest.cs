@@ -24,16 +24,21 @@ public class rocketPhysicsTest : MonoBehaviour {
         //Torquing test
 		if(Input.GetAxis("ws") + Input.GetAxis("ad") + Input.GetAxis("qe") != 0)
         {
-            torqueVector = new Vector3(Input.GetAxis("ws"), -Input.GetAxis("qe"), -Input.GetAxis("ad"));
+            torqueVector = new Vector3(Input.GetAxis("ws"), -Input.GetAxis("ad"), -Input.GetAxis("qe"));
             rb.AddRelativeTorque(torqueVector * sasStrength);
         }
         else if(useSAS)
         {
-            var localAngularVelocity = transform.InverseTransformDirection(rb.angularVelocity).normalized;
-            torqueVector = -localAngularVelocity;
-            rb.AddRelativeTorque(torqueVector * sasStrength);
-        }        
-
+            if (rb.angularVelocity.magnitude >= .2)
+            {
+                torqueVector = -rb.angularVelocity.normalized;
+                rb.AddTorque(torqueVector * sasStrength);
+            }
+            else if(rb.angularVelocity.magnitude > 0)
+            {
+               rb.angularVelocity = Vector3.zero;
+            }
+        }
         torqueVector = Vector3.zero;
 
         //Thrust test
@@ -53,9 +58,8 @@ public class rocketPhysicsTest : MonoBehaviour {
 
         if(thrust * throttlePosition > 0)
         {
-            rb.AddRelativeForce(0, thrust * throttlePosition, 0);
+            rb.AddRelativeForce(0, 0, thrust * throttlePosition);
         }
-        print("throttle: " + throttlePosition + "  --|--  thrust:" + throttlePosition * thrust);
 
         if (ParticleSys)
         {
@@ -63,7 +67,11 @@ public class rocketPhysicsTest : MonoBehaviour {
 
             if(throttlePosition == 0)
             {
-
+                ParticleSys.GetComponent<ParticleSystem>().enableEmission = false;
+            }
+            else
+            {
+                ParticleSys.GetComponent<ParticleSystem>().enableEmission = false;
             }
         }
     }
