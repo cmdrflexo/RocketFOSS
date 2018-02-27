@@ -9,6 +9,8 @@ public class rocketPhysicsTest : MonoBehaviour {
     public float thrust = 1.0f;
     public float throttleSensitivity = 0.01f;
     public GameObject ParticleSys;
+
+    public GameObject navball_control;
     private Vector3 torqueVector;
     private Rigidbody rb;
 
@@ -47,14 +49,6 @@ public class rocketPhysicsTest : MonoBehaviour {
         {
             throttlePosition = Mathf.Clamp01(throttlePosition + (Input.GetAxis("throttle") * throttleSensitivity));
         }
-        if (Input.GetButtonDown("throttlemax"))
-        {
-            throttlePosition = 1.0f;
-        }
-        else if (Input.GetButtonDown("throttlemin"))
-        {
-            throttlePosition = 0.0f;
-        }
 
         if(thrust * throttlePosition > 0)
         {
@@ -71,8 +65,29 @@ public class rocketPhysicsTest : MonoBehaviour {
             }
             else
             {
-                ParticleSys.GetComponent<ParticleSystem>().enableEmission = false;
+                ParticleSys.GetComponent<ParticleSystem>().enableEmission = true;
             }
+        }
+
+        //Navball Control
+
+        if (navball_control)
+        {
+            navball_control.GetComponent<navball_control>().setNewThrottlePosition(throttlePosition);
+            navball_control.GetComponent<navball_control>().setNewVelocity(rb.velocity.magnitude);
+            navball_control.GetComponent<navball_control>().setNewAltitude(transform.position.y);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("throttlemax"))
+        {
+            throttlePosition = 1.0f;
+        }
+        else if (Input.GetButtonDown("throttlemin"))
+        {
+            throttlePosition = 0.0f;
         }
     }
 }

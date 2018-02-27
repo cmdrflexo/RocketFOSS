@@ -10,7 +10,7 @@ public class navball_camera : MonoBehaviour {
     {
         if (PlayerShip)
         {
-            this.transform.rotation = PlayerShip.transform.rotation;
+            this.transform.SetPositionAndRotation(transform.position, PlayerShip.transform.rotation);
         }
     }
 }
