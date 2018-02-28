@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class navball_control : MonoBehaviour {
 
+public class navball_control : MonoBehaviour {
+    #region variables
     private Quaternion navballRotation;
     private float throttlePosition;
     private int velocity;
@@ -19,8 +20,10 @@ public class navball_control : MonoBehaviour {
     private GameObject rcsIndicator;
     private GameObject sasIndicator;
 
+    #endregion
+    #region public methods
     //Public method to set throttle position display
-	public void setNewThrottlePosition(float pos)
+    public void setNewThrottlePosition(float pos)
     {
         throttlePosition = pos / 4;
     }
@@ -52,7 +55,7 @@ public class navball_control : MonoBehaviour {
     {
         sas = state;
     }
-
+    #endregion
     private void Start()
     {
         //Find UI components
