@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlanetOrbit : MonoBehaviour {
 
-    public float semiMayorAxis = 0;
+    public float semiMajorAxis = 0;
     public float semiMinorAxis = 0;
     public float eccentricity = 0;
     public float rMax = 0; //Apoapsis
@@ -33,14 +33,14 @@ public class PlanetOrbit : MonoBehaviour {
 
 	void generateOrbit() {
 		int index = 0;
-		semiMayorAxis = (rMax + rMin) / 2;
+		semiMajorAxis = (rMax + rMin) / 2;
 		semiMinorAxis = Mathf.Sqrt(rMax * rMin);
-		eccentricity = Mathf.Sqrt(1 - (semiMinorAxis * semiMinorAxis) / (semiMayorAxis * semiMayorAxis));
+		eccentricity = Mathf.Sqrt(1 - (semiMinorAxis * semiMinorAxis) / (semiMajorAxis * semiMajorAxis));
 
 		float movOffset = ((rMax + rMin) / 2) - rMin;
 
 		while (timer < Mathf.PI * 2) {   
-            posX = semiMayorAxis * Mathf.Cos(timer) - movOffset;
+            posX = semiMajorAxis * Mathf.Cos(timer) - movOffset;
             posZ = semiMinorAxis * Mathf.Sin(timer);
 
 			r = Mathf.Sqrt((posX - offset.position.x) * (posX - offset.position.x) + (posZ - offset.position.z) * (posZ - offset.position.z));
@@ -55,7 +55,7 @@ public class PlanetOrbit : MonoBehaviour {
 
             temp = new Vector3(nPosX2, nPosY, nPosZ);
 			temp = temp + offset.position;
-			float tempVel = Mathf.Sqrt((G * mass) * ((2 / r) - (1 / semiMayorAxis)));
+			float tempVel = Mathf.Sqrt((G * mass) * ((2 / r) - (1 / semiMajorAxis)));
 
 			orbitPoint tempOrbitPoint;
 			tempOrbitPoint.position = temp;
