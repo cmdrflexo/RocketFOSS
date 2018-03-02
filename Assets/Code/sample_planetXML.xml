@@ -1,0 +1,28 @@
+<CelestialBody>
+	<Name>MyPlanet</Name><!--Name of the body exposed in the UI-->
+	<Description>Planet Description</Description> <!--Description of the body displayed in the system browser-->
+	<ID>Nyxton.MyPlanet</ID> <!--Unique name of the body, used only internally-->
+	<Heightmap>heightmap.dds</Heightmap> <!--bitmap used as the body's scaledspace heightmap-->
+	<DetailMap>default</DetailMap> <!--detail tiling map used on the terrain of the body-->
+	<ParentObject>Sun</ParentObject> <!--object the body orbits-->
+	<Radius>600000</Radius> <!--radius in meters-->
+	<SurfaceGravity>1.00</SurfaceGravity> <!--gravity multiplied by the gravitational constant G-->
+	<Apoapsis>13599840256</Apoapsis> <!--apoapsis from the parent body in meters-->
+	<Periapsis>13599840256</Periapsis> <!--periapsis from the parent body in meters-->
+	<InclinationAngle>0.00</InclinationAngle> <!--Inclination angle of the body's orbit-->
+	<InclinationNode>0.00</InclinationNode> <!--Inclination node of the body's orbit-->
+	<AxialTilt>0.0</AxialTilt> <!--Axial tilt of the body in degrees-->
+	<SiderealPeriod>21000</SiderealPeriod> <!--Length of the body's sidereal day in seconds-->
+	<Atmosphere>
+		<OxygenPresent>True</OxygenPresent><!--Is oxygen present in the body's atmosphere?---->
+		<MaxHeight>70000</MaxHeight> <!--Height at which the atmosphere stops in meters-->
+		<PressureCurve> <!--keys used in the curve of the atmospheric system-->
+			<key>0, 0</key>
+			<key>1, 1</key>
+		</PressureCurve>
+	</Atmosphere>
+	<CustomAttribute>
+		<Name>Attribute</Name> <!--Name of the custom attribute-->
+		<Value>Value</Value> <!--Value of the custom attribute-->
+	</CustomAttribute>
+</CelestialBody>

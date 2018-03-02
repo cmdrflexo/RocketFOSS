@@ -1,0 +1,8 @@
+﻿<Settings>
+  <Volume>
+    <sfx>0.5</sfx>
+    <music>0.5</music>
+    <ui>0.5</ui>
+    <voice>0.5</voice>
+  </Volume>
+</Settings>
