@@ -5,8 +5,11 @@ using RFOSSCore;
 
 public class SettingsTest : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        RFOSSCore.SettingsIO.WriteDefaultSettings();
-	}
+    public SaveIO mySaveIO = new SaveIO();
+
+	void Start ()
+    {
+        mySaveIO.LoadSave("Abraxillim");
+        print(mySaveIO.CurrentSaveData.name);
+    }
 }

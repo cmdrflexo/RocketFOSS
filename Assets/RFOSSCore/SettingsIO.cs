@@ -11,7 +11,7 @@ namespace RFOSSCore
     public static class SettingsIO
     {
         #region
-        //Used to tag audio sources to indicate which setting they should obey. Maybe create a scriptable object for this.
+        //Used to tag audio sources to indicate which setting they should obey.
         public enum volumeTypes
         {
             sfx,
@@ -96,10 +96,10 @@ namespace RFOSSCore
             xWriter.WriteStartElement("Settings");
 
             xWriter.WriteStartElement("Volume");
-            xWriter.WriteStartElement("sfx"); xWriter.WriteString("0.5"); xWriter.WriteEndElement();
-            xWriter.WriteStartElement("music"); xWriter.WriteString("0.5"); xWriter.WriteEndElement();
-            xWriter.WriteStartElement("ui"); xWriter.WriteString("0.5"); xWriter.WriteEndElement();
-            xWriter.WriteStartElement("voice"); xWriter.WriteString("0.5"); xWriter.WriteEndElement();
+            xWriter.WriteElementString("sfx", "0.5");
+            xWriter.WriteElementString("music", "0.5");
+            xWriter.WriteElementString("ui", "0.5");
+            xWriter.WriteElementString("voice", "0.5");
             xWriter.WriteEndElement();//Volume
             xWriter.WriteEndElement();//Settings
 
