@@ -8,10 +8,11 @@ using System.Text;
 
 namespace RFOSSCore
 {
-    public static class SettingsIO
+    public class SettingsIO
     {
         #region
         //Used to tag audio sources to indicate which setting they should obey.
+        [System.Serializable]
         public enum volumeTypes
         {
             sfx,
@@ -27,14 +28,15 @@ namespace RFOSSCore
             public float ui = 0.5f;
             public float voice = 0.5f;
         }
-        public static bool settingsOK = false;
 
-        public static Volumes Volume = new Volumes();
-        public static string SettingsXML;
+        public bool settingsOK = false;
+
+        public Volumes Volume = new Volumes();
+        public string SettingsXML;
         #endregion
 
         //Read the Settings.xml file.
-        public static void ReadSettings()
+        public void ReadSettings()
         {
             if (File.Exists("Settings.xml"))
             {
@@ -74,7 +76,7 @@ namespace RFOSSCore
             }
         }
 
-        public static void WriteSettings(float s, float m, float u, float v)
+        public void WriteSettings(float s, float m, float u, float v)
         {
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load("Settings.xml");
@@ -88,7 +90,7 @@ namespace RFOSSCore
             ReadSettings();
         }
 
-        public static void WriteDefaultSettings()
+        public void WriteDefaultSettings()
         {
             //Write default settings
             XmlTextWriter xWriter = new XmlTextWriter("Settings.xml", Encoding.UTF8);

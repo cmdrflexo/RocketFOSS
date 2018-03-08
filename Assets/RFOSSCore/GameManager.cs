@@ -1,42 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 namespace RFOSSCore
 {
     //Core class for storing data relevant to the entire play session
     public static class GameManager
     {
-        #region GameState, paused/playing states and enum
-        public enum e_gameStates
+        public static SettingsIO Settings = new SettingsIO();
+        public static SaveIO Save = new SaveIO();
+
+        #region Timecode Handling
+
+        public static double timecode
         {
-            paused,
-            playing
+            get { return Save.CurrentSaveData.timecode; }
+            set { Save.CurrentSaveData.timecode = value; }
         }
-
-        public static e_gameStates GameState = e_gameStates.playing;
-
-        public static void toggleGameState ()
+        
+        public static void UpdateTimecode (float delta)
         {
-            if (GameState == e_gameStates.paused)
-            {
-                GameState = e_gameStates.playing;
-            }
-            else if (GameState != e_gameStates.paused)
-            {
-                GameState = e_gameStates.paused;
-            }
+            timecode += delta;
         }
         #endregion
 
-        #region GameTime and time set method
-        private static float gameTime;
-
-        public static float GameTime
+        public static void ChangeScene(string scene)
         {
-            get { return gameTime; }
-            set { gameTime = value; }
+            SceneManager.LoadScene(scene);
         }
-        #endregion
     }
 }

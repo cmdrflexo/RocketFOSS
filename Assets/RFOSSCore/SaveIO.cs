@@ -88,30 +88,38 @@ namespace RFOSSCore
             }
         }
 
-        public void CreateNewSave(string name)
+        public void CreateNewSave(string name, bool loadAfterCreating)
         {
-            Directory.CreateDirectory("Saves/" + name);
-            XmlTextWriter xWriter = new XmlTextWriter("Saves/" + name + "/save.xml", Encoding.UTF8);
-            xWriter.Formatting = Formatting.Indented;
+            if (!Directory.Exists("Saves/" + name))
+            {
+                Directory.CreateDirectory("Saves/" + name);
+                XmlTextWriter xWriter = new XmlTextWriter("Saves/" + name + "/save.xml", Encoding.UTF8);
+                xWriter.Formatting = Formatting.Indented;
 
-            xWriter.WriteStartElement("Save");
-            xWriter.WriteElementString("Name", name);
-            xWriter.WriteElementString("Timecode", "0");
-            xWriter.WriteStartElement("Experience");
-            xWriter.WriteElementString("Materials", "0");
-            xWriter.WriteElementString("Propulsion", "0");
-            xWriter.WriteElementString("LifeSupport", "0");
-            xWriter.WriteElementString("Electronics", "0");
-            xWriter.WriteElementString("Astronomy", "0");
-            xWriter.WriteEndElement();//Experience
-            xWriter.WriteElementString("Credits", "10000");
-            xWriter.WriteEndElement();//Save
-            xWriter.Close();
+                xWriter.WriteStartElement("Save");
+                xWriter.WriteElementString("Name", name);
+                xWriter.WriteElementString("Timecode", "0");
+                xWriter.WriteStartElement("Experience");
+                xWriter.WriteElementString("Materials", "0");
+                xWriter.WriteElementString("Propulsion", "0");
+                xWriter.WriteElementString("LifeSupport", "0");
+                xWriter.WriteElementString("Electronics", "0");
+                xWriter.WriteElementString("Astronomy", "0");
+                xWriter.WriteEndElement();//Experience
+                xWriter.WriteElementString("Credits", "10000");
+                xWriter.WriteEndElement();//Save
+                xWriter.Close();
+
+                if (loadAfterCreating)
+                {
+                    LoadSave(name);
+                }
+            }
         }
 
         public void QuickSave(saveData data)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void LoadSave(string name)
