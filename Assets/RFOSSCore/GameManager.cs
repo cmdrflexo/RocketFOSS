@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,8 +10,12 @@ namespace RFOSSCore
     {
         public static SettingsIO Settings = new SettingsIO();
         public static SaveIO Save = new SaveIO();
+        public static bool isPaused = true;
+
 
         #region Timecode Handling
+
+        public static float timescale = 5000000.0f;
 
         public static double timecode
         {
@@ -20,7 +25,7 @@ namespace RFOSSCore
         
         public static void UpdateTimecode (float delta)
         {
-            timecode += delta;
+            timecode += delta * timescale;
         }
         #endregion
 

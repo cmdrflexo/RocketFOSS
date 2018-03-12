@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[AddComponentMenu("Camera-Control/Mouse Orbit with zoom")]
+[AddComponentMenu("Camera-Control/Mouse Orbit")]
 public class MouseOrbit : MonoBehaviour
 {
 
